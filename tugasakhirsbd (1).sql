@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 23, 2021 at 05:15 PM
+-- Generation Time: Nov 23, 2021 at 05:21 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.14
 
@@ -157,7 +157,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Indexes for table `hotel`
 --
 ALTER TABLE `hotel`
-  ADD PRIMARY KEY (`id_negara`,`id_hotel`);
+  ADD PRIMARY KEY (`id_hotel`);
 
 --
 -- Indexes for table `kendaraan`
@@ -169,7 +169,7 @@ ALTER TABLE `kendaraan`
 -- Indexes for table `negara`
 --
 ALTER TABLE `negara`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id_negara`);
 
 --
 -- Indexes for table `user`
@@ -182,10 +182,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `hotel`
+--
+ALTER TABLE `hotel`
+  MODIFY `id_hotel` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `negara`
 --
 ALTER TABLE `negara`
-  MODIFY `id_user` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_negara` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
