@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 23, 2021 at 05:22 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.4.25
+-- Host: localhost:3306
+-- Generation Time: Nov 23, 2021 at 05:15 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -79,8 +79,7 @@ CREATE TABLE `kendaraan` (
 
 INSERT INTO `kendaraan` (`id_kendaraan`, `id_negara`, `nama_kendaraan`) VALUES
 (1, 1, 'Becak Terbang'),
-(1, 1, 'Becak Terbang'),
-(2, 2, 'Jetpack JoyRide');
+(2, 2, 'Jetpack Joyride');
 
 -- --------------------------------------------------------
 
@@ -89,7 +88,7 @@ INSERT INTO `kendaraan` (`id_kendaraan`, `id_negara`, `nama_kendaraan`) VALUES
 --
 
 CREATE TABLE `negara` (
-  `is_deleted` int(1) NOT NULL DEFAULT 0,
+  `is_deleted` int(1) NOT NULL DEFAULT '0',
   `id_user` int(20) NOT NULL,
   `id_negara` int(20) NOT NULL,
   `id_kendaraan` int(20) NOT NULL,
@@ -148,7 +147,7 @@ INSERT INTO `user` (`id_user`, `username`, `password`) VALUES
 --
 DROP TABLE IF EXISTS `travelog`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `travelog`  AS SELECT `a`.`id_user` AS `id_user`, `d`.`username` AS `username`, `a`.`is_deleted` AS `is_deleted`, `a`.`negara` AS `negara`, `a`.`id_negara` AS `id_negara`, `b`.`nama_kendaraan` AS `nama_kendaraan`, `c`.`nama_hotel` AS `nama_hotel`, `c`.`check_in` AS `check_in`, `c`.`check_out` AS `check_out` FROM (((`negara` `a` join `kendaraan` `b` on(`a`.`id_kendaraan` = `b`.`id_kendaraan`)) join `hotel` `c` on(`a`.`id_hotel` = `c`.`id_hotel`)) join `user` `d` on(`d`.`id_user` = `a`.`id_user`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `travelog`  AS SELECT `a`.`id_user` AS `id_user`, `d`.`username` AS `username`, `a`.`is_deleted` AS `is_deleted`, `a`.`negara` AS `negara`, `a`.`id_negara` AS `id_negara`, `b`.`nama_kendaraan` AS `nama_kendaraan`, `c`.`nama_hotel` AS `nama_hotel`, `c`.`check_in` AS `check_in`, `c`.`check_out` AS `check_out` FROM (((`negara` `a` join `kendaraan` `b` on((`a`.`id_kendaraan` = `b`.`id_kendaraan`))) join `hotel` `c` on((`a`.`id_hotel` = `c`.`id_hotel`))) join `user` `d` on((`d`.`id_user` = `a`.`id_user`))) ;
 
 --
 -- Indexes for dumped tables
@@ -159,6 +158,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 ALTER TABLE `hotel`
   ADD PRIMARY KEY (`id_negara`,`id_hotel`);
+
+--
+-- Indexes for table `kendaraan`
+--
+ALTER TABLE `kendaraan`
+  ADD PRIMARY KEY (`id_kendaraan`);
 
 --
 -- Indexes for table `negara`
